@@ -7,7 +7,8 @@ const talkedRecently = new Set();
  exports.run = (client, message, args) => {
      let sue = args[0]; 
      let amount = args[2];
-        let shutdown = args[0];
+     let close = args[0];
+     let choose = args[3];
      
      var today = new Date();
 var dd = today.getDate();
@@ -28,29 +29,69 @@ today = mm + '/' + dd + '/' + yyyy;
             let victim = message.guild.member(message.mentions.users.first());
                    let reason = args.slice(3).join(' ');
                        var full =  `- Prosecutor: ${message.author} \n- Defendant: ${victim} \n- Reason: ${reason} \n- Amount: $${amount}` 
+                                 const accept = client.emojis.find("name", "accept");
+                   const deny = client.emojis.find("name", "deny");
                     let x = new Discord.RichEmbed()
                          .setColor("#DEB887")    
                          .addField(`Court Date: ` + today, full)
+                        .addField('Votes', `This needs 6  ${accept} to be passed or 6  ${deny} to be denied!`)
                         .setFooter(`Case ID: ${message.id}`);
-     message.guild.channels.find("name", "court").send(x);
- } 
-            if (shutdown === 'shutdown') {
-                                         let update = new Discord.RichEmbed()
-                    .setColor("#20B2AA")    
-                    .addField(`Shutdown`, `I've been shutdown due to an update or repair! Please stand by!`)
-      
-message.guild.channels.find("name", "general").send(update).then(() => {
-            client.destroy().then(() => {
-            })
-        })
-    }
+
+     message.guild.channels.find("name", "court").send(x) 
+                  .then(function (message) {
+                    message.react(accept);
+                    message.react(deny);
+     });
+                 
+                  
+ } else 
+     if (close === 'close') {
+         let id = args.slice(2).join(' ');
+         let idsize = id.length-1;
+         let victim = message.guild.member(message.mentions.users.first());
+         if (!victim) {
+                    let novictim = new Discord.RichEmbed()
+                                      .setColor("#8b0000")    
+                        .addField(`No victim`, `You didn't mention a victim!`);
+             message.channel.send(novictim);
+         } else
+             if (!id) {
+                                                               let noid = new Discord.RichEmbed()
+                                      .setColor("#8b0000")    
+                        .addField(`No Case ID`, `You didn't put a case ID!`); 
+                         message.channel.send(noid);
+             } else
+         if (Math.round(idsize) < 17) {
+                                              let noid2 = new Discord.RichEmbed()
+                                      .setColor("#8b0000")    
+                        .addField(`Low Case ID`, `The Case ID seems to be low character count!`); 
+                         message.channel.send(noid2);
+         } else
+         if (!choose) {
+                                              let nochoose = new Discord.RichEmbed()
+                                      .setColor("#8b0000")    
+                        .addField(`No Won or Lost`, `You didn't put if they won or lost!`); 
+             message.channel.send(nochoose);
+         } else 
+         if (choose === 'won') {
+                                        let z = new Discord.RichEmbed()
+                         .setColor("#2ace2a")    
+                        .addField(`Case ID: ${id} has been closed.`, `${victim} has ${choose} the case!`)  
+                                           message.guild.channels.find("name", "court").send(z);
+         } else
+             if (choose === 'lost') {
+                                                         let y = new Discord.RichEmbed()
+                         .setColor("#8b0000")    
+                        .addField(`Case ID: ${id} has been closed.`, `${victim} has ${choose} the case!`)  
+                                            message.guild.channels.find("name", "court").send(y);
+             } else {
+                                                                          let unknown = new Discord.RichEmbed()
+                         .setColor("#8b0000")    
+                        .addField(`Unknown Option`, `Umm.. I don't think ${choose} is lost or won.`)  
+                                                                          message.channel.send(unknown);
+             }
+     }
  }
-                               
-  
-             
-     
-     
-     
 module.exports.help = {
     name: "sue"
 }
