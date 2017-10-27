@@ -45,6 +45,7 @@ today = mm + '/' + dd + '/' + yyyy;
                   
  } else 
      if (close === 'close') {
+          if (message.member.hasPermission("ADMINISTRATOR")) { 
          let id = args.slice(2).join(' ');
          let idsize = id.length-1;
          let victim = message.guild.member(message.mentions.users.first());
@@ -89,6 +90,12 @@ today = mm + '/' + dd + '/' + yyyy;
                         .addField(`Unknown Option`, `Umm.. I don't think ${choose} is lost or won.`)  
                                                                           message.channel.send(unknown);
              }
+     } else {
+                                                                                  let noperms = new Discord.RichEmbed()
+                         .setColor("#8b0000")    
+                        .addField(`No Permission`, `You don't have permission!`)  
+                                                                          message.channel.send(noperms); 
+     }
      }
  }
 module.exports.help = {
