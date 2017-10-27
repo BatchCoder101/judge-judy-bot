@@ -7,6 +7,7 @@ const talkedRecently = new Set();
  exports.run = (client, message, args) => {
      let sue = args[0]; 
      let amount = args[2];
+        let shutdown = args[0];
      
      var today = new Date();
 var dd = today.getDate();
@@ -32,7 +33,17 @@ today = mm + '/' + dd + '/' + yyyy;
                          .addField(`Court Date: ` + today, full)
                         .setFooter(`Case ID: ${message.id}`);
      message.guild.channels.find("name", "court").send(x);
- }
+ } 
+            if (shutdown === 'shutdown') {
+                                         let update = new Discord.RichEmbed()
+                    .setColor("#20B2AA")    
+                    .addField(`Shutdown`, `I've been shutdown due to an update or repair! Please stand by!`)
+      
+message.guild.channels.find("name", "general").send(update).then(() => {
+            client.destroy().then(() => {
+            })
+        })
+    }
  }
                                
   
