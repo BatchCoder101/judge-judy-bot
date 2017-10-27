@@ -38,8 +38,8 @@ today = mm + '/' + dd + '/' + yyyy;
 
      message.guild.channels.find("name", "court").send(x) 
                   .then(function (message) {
-                    message.react(accept);
                     message.react(deny);
+                    message.react(accept);  
      });
                  
                   
