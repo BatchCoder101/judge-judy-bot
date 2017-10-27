@@ -28,8 +28,8 @@ today = mm + '/' + dd + '/' + yyyy;
             let victim = message.guild.member(message.mentions.users.first());
                    let reason = args.slice(3).join(' ');
                        var full =  `- Prosecutor: ${message.author} \n- Defendant: ${victim} \n- Reason: ${reason} \n- Amount: $${amount}` 
-                                 const accept = client.emojis.find("name", "accept");
-                   const deny = client.emojis.find("name", "deny");
+                                 const accept = client.emojis.find("name", "courtaccept");
+                   const deny = client.emojis.find("name", "courtdeny");
                     let x = new Discord.RichEmbed()
                          .setColor("#DEB887")    
                          .addField(`Court Date: ` + today, full)
