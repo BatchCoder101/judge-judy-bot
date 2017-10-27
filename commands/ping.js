@@ -1,13 +1,12 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
-const talkedRecently = new Set();
 
  exports.run = (client, message, args) => {
                     
                             if (`${client.ping}` <= 50) { 
                             let  goodping = new Discord.RichEmbed()
-                                .setColor("#CD853F")
+                                .setColor("#2ace2a")
                                 .addField(`Ping: ${client.ping}`, `Woo! I'm feeling good! :slight_smile:`)
                                     message.channel.send(goodping);
                             }
