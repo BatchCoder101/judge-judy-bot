@@ -8,6 +8,7 @@ const fs = require("fs");
      let amount = args[2];
      let close = args[0];
      let choose = args[3];
+        let shutdown = args[0];
      
      var today = new Date();
 var dd = today.getDate();
@@ -96,7 +97,17 @@ today = mm + '/' + dd + '/' + yyyy;
                         .addField(`No Permission`, `You don't have permission!`)  
                                                                           message.channel.send(noperms); 
      }
-     }
+     } else 
+                if (shutdown === 'shutdown') {
+                                         let update = new Discord.RichEmbed()
+                    .setColor("#20B2AA")    
+                    .addField(`Shutdown`, `I've been shutdown due to an update or repair! Please stand by!`)
+      
+message.guild.channels.find("name", "general").send(update).then(() => {
+            client.destroy().then(() => {
+            })
+        })
+    }
  }
 module.exports.help = {
     name: "sue"
