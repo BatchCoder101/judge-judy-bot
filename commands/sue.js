@@ -7,7 +7,7 @@ const fs = require("fs");
      let sue = args[0]; 
      let amount = args[2];
      let close = args[0];
-     let choose = args[3];
+     let choose = args[2];
         let shutdown = args[0];
      
      var today = new Date();
@@ -47,7 +47,7 @@ today = mm + '/' + dd + '/' + yyyy;
  } else 
      if (close === 'close') {
           if (message.member.hasPermission("ADMINISTRATOR")) { 
-         let id = args.slice(2).join(' ');
+         let id = args.slice(3).join(' ');
          let idsize = id.length-1;
          let victim = message.guild.member(message.mentions.users.first());
          if (!victim) {
