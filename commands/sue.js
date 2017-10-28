@@ -25,7 +25,7 @@ if(mm<10) {
 
 today = mm + '/' + dd + '/' + yyyy;
 
-              if (sue === '-') {  
+              if (sue === 'start') {  
             let victim = message.guild.member(message.mentions.users.first());
                    let reason = args.slice(3).join(' ');
                        var full =  `- Prosecutor: ${message.author} \n- Defendant: ${victim} \n- Reason: ${reason} \n- Amount: $${amount}` 
